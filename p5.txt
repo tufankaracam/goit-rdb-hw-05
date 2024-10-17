@@ -1,0 +1,20 @@
+DELIMITER //
+
+DROP FUNCTION IF EXISTS divide_values;
+
+CREATE FUNCTION divide_values(val1 FLOAT, val2 FLOAT) 
+RETURNS FLOAT
+DETERMINISTIC
+NO SQL
+BEGIN
+    IF val2 = 0 THEN
+        RETURN NULL;
+    ELSE
+        RETURN val1 / val2;
+    END IF;
+END//
+
+DELIMITER ;
+
+SELECT order_id, quantity, divide_values(quantity, 2.5) AS divided_quantity
+FROM order_details;

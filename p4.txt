@@ -1,0 +1,4 @@
+WITH TempDetails AS (
+	select order_id,quantity from order_details where quantity > 10
+)
+SELECT order_id,AVG(quantity) average_quantity FROM TempDetails group by order_id
